@@ -66,7 +66,7 @@ class Config():
 
     # returns a new config from subset of keys
     def get_sub_dict(self, keys):
-        return {k:self.values[k] for k  in keys}
+        return {k: self.values[k] for k in keys}
 
     # returns a new config from subset of keys
     def get_sub_config(self, keys):
@@ -92,7 +92,7 @@ class Config():
         if isinstance(merge_dct, Mapping):
             for k in merge_dct:
                 if (k in dct and isinstance(dct[k], dict)
-                    and isinstance(merge_dct[k], Mapping)):
+                        and isinstance(merge_dct[k], Mapping)):
                     self.merge_dict(dct[k], merge_dct[k])
                 else:
                     try:
@@ -107,13 +107,17 @@ class Config():
 class ConfigLoader():
 
     def __init__(self, props_file, sources_dir=None):
-        self.sources_dir = sources_dir
-        self.from_sources = self.from_properties(props_file)
+        self.props_file = props_file
+        self.set_resource_dir(sources_dir)
 
     def find_env_var(self, key):
         for k, v in os.environ._data.items():
             if compare_str(k, key):
                 return v
+
+    def set_resource_dir(self, directory):
+        self.sources_dir = directory
+        self.from_sources = self.from_properties(self.props_file)
 
     @classmethod
     def load(cls, props_file, sources_dir=None):
@@ -147,11 +151,10 @@ class ConfigLoader():
 
     def read_sources(self, config_files):
         # Read in all the YAML
-
         cfg = {}
         for n, f in config_files.items():
             with open(self.get_resource_path(f)) as file:
-                cfg[n] = yaml.safe_load(file) # Resource(f, yaml.safe_load(file)).as_dict()
+                cfg[n] = yaml.safe_load(file)  # Resource(f, yaml.safe_load(file)).as_dict()
         return cfg
 
     def read_binaries(self, binaries):
@@ -190,6 +193,18 @@ class ConfigLoader():
             raise ValueError("Config missing required fields: " + str(required_fields))
         options['ust_executable'] = options['binary']['ust_executable']['filename']
         return Config(options)
+
+    def merge_with(self, configloader):
+        self.from_sources.update(configloader.from_sources)
+        self.sources_dir = configloader.sources_dir
+        self.props_file = configloader.props_file
+
+    def get_configs_as_dict(self, names=None):
+        full_cfg = deepcopy(self.from_sources)
+        if not names:
+            return full_cfg
+        else:
+            return {k: v for k, v in full_cfg.items() if k in names}
 
 
 class Resource():
