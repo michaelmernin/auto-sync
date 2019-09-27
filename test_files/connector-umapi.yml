@@ -26,6 +26,8 @@ server:
   #ims_endpoint_jwt: /ims/exchange/jwt
   #timeout: 120
   #retries: 3
+  host: "usermanagement-stage.adobe.io"
+  ims_host: "ims-na1-stg1.adobelogin.com"
 
 # (required) enterprise organization settings
 # You must specify all five of these settings.  Consult the
@@ -35,10 +37,10 @@ server:
 # if relative, it is interpreted relative to this configuration file.]
 enterprise:
   org_id: "D28927675A9581A20A49412A@AdobeOrg"
-  api_key: "API key goes here"
-  client_secret: "Client secret goes here"
-  tech_acct: "Tech account ID goes here"
-  #priv_key_path: "private.key"
+  api_key: "30063bb75d2747faaaeaddaed6b36171"
+  client_secret: "87e70dc7-1d76-4eaf-9b73-75366cf18458"
+  tech_acct: "B7A639EA5B23D1D10A494022@techacct.adobe.com"
+  priv_key_path:  "private.key"
 
   # (optional) As an alternative to priv_key_path, you can place the private key 
   # data directly in this file.  To do this, remove the priv_key_path entry above 
@@ -66,7 +68,7 @@ enterprise:
 
   # (optional): You can secure your private key data by encrypting it, as with
   #     openssl pkcs8 -in private.key -topk8 -v2 des3 -out private-encrypted.key
-  # which prompts for a passphrase and gets a passphrase-encrypted file in PKCS#8 format.
+  # which prompts for a passphrase and creates a passphrase-encrypted file in PKCS#8 format.
   # Having done this, you can use the setting priv_key_pass to specify the passphrase needed
   # by User Sync to decrypt the private key file (or private key data), as in:
   #priv_key_pass: "my passphrase for my private key"

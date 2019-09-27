@@ -17,10 +17,10 @@
 # You must specify all four of these settings.  Consult with your
 # enterprise directory administrators to get suitable values.
 # These access credentials are sensitive and must be protected.
-username: "LDAP or Credential Manager username goes here"
-password: "LDAP password goes here"
-host: "ldap://ldap.example.com"
-base_dn: "DC=example,DC=com"
+username: "adservice@seaofcarag.com"
+password: "P3rficient"
+base_dn: "DC=seaofcarag,DC=com"
+host: "ldap://seaofcarag.com:389"
 
 # (optional) You can specify what Authentication method to bind LDAP
 # connection with. You can choose either Anonymous, Simple or NTLM.

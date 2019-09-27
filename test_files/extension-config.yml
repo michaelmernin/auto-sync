@@ -15,8 +15,7 @@
 # in the source_attributes dictionary in your after_mapping_hook.  Any
 # of these attributes which don't have a value in the directory entry for
 # a given user will have a Python None value in that user's dictionary.
-extended_attributes:
-  - sn
+extended_attributes: []
 
 # (optional) extended_adobe_groups (default value is an empty list)
 # extended_adobe_groups is a list of Adobe-side product configuration
@@ -26,8 +25,7 @@ extended_attributes:
 # as well as any found in the groups setting, and the effect of the
 # --process-groups argument will treat them exactly as if the
 # extended mapping had been specified as part of the groups setting.
-extended_adobe_groups:
-
+extended_adobe_groups: []
 
 # (required) after_mapping_hook
 # This is where you specify your Python hook code.  Note the vertical bar
@@ -49,5 +47,3 @@ extended_adobe_groups:
 #     logger              # an object of type logging.logger which outputs to the console and/or file log
 #
 after_mapping_hook: |
-  sn = source_attributes.get('sn')
-

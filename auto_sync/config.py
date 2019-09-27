@@ -108,16 +108,17 @@ class ConfigLoader():
 
     def __init__(self, props_file, sources_dir=None):
         self.props_file = props_file
-        self.set_resource_dir(sources_dir)
+        self.sources_dir = sources_dir
+        self.from_sources = self.from_properties(self.props_file)
+
+    def set_source_dir(self, source_dir):
+        self.sources_dir = source_dir
+        self.read_data_from_source_dir()
 
     def find_env_var(self, key):
         for k, v in os.environ._data.items():
             if compare_str(k, key):
                 return v
-
-    def set_resource_dir(self, directory):
-        self.sources_dir = directory
-        self.from_sources = self.from_properties(self.props_file)
 
     @classmethod
     def load(cls, props_file, sources_dir=None):
@@ -139,22 +140,28 @@ class ConfigLoader():
                 override = self.find_env_var("CFG." + s + "." + config_option)
                 if override:
                     v[config_option] = decode(override)
-
             config[s] = v
-            if self.sources_dir:
-                if s == 'config_files':
-                    config[s] = self.read_sources(v)
-                elif s == 'binary_files':
-                    config[s] = self.read_binaries(v)
+
+        if self.sources_dir:
+            self.read_data_from_source_dir()
 
         return config
+
+    def read_data_from_source_dir(self):
+        if not self.sources_dir:
+            raise ValueError("Cannot read data without a source directory")
+        try:
+            self.from_sources['config_files'] = self.read_sources(self.from_sources['config_files'])
+            self.from_sources['binary_files'] = self.read_binaries(self.from_sources['binary_files'])
+        except FileNotFoundError as e:
+            raise FileNotFoundError("Could not read source file: " + str(e))
 
     def read_sources(self, config_files):
         # Read in all the YAML
         cfg = {}
         for n, f in config_files.items():
             with open(self.get_resource_path(f)) as file:
-                cfg[n] = yaml.safe_load(file)  # Resource(f, yaml.safe_load(file)).as_dict()
+                cfg[n] = yaml.safe_load(file)
         return cfg
 
     def read_binaries(self, binaries):
