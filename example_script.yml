@@ -1,0 +1,71 @@
+# SYNC 1
+
+# Example
+# id: Arbiratry name - just for tracking
+# Runs must be arranaged in list with the (-) notation before each
+
+#- id: "example_sync"
+#  sync_type: "ldap"
+#  sync_args: "--process-groups --users mapped"
+#  sync_config:
+#    # Only need to put in what is DIFFERENT from the default files.
+#    # Note: dictionaries are recursed, but a non-dict values will be replaced
+#    # In theory, client can modify the ROOT files for unchanging parameters,
+#    # and then only a few entries would be needed in here.
+#    config:
+#      directory_users:
+#        groups:
+#          - directory_group: "Group A"
+#            adobe_groups:
+#              - "Adobe Group A"
+#    connector:
+#      username: "LDAP or Credential Manager username goes here"
+#      password: "LDAP password goes here"
+#      host: "ldap://ldap.example.com"
+#      base_dn: "DC=example,DC=com"
+
+
+- id: "example_sync"
+  sync_type: "ldap"
+  sync_args: "--process-groups --users mapped"
+  sync_config:
+    # Only need to put in what is DIFFERENT from the default files.
+    # Note: dictionaries are recursed, but a non-dict values will be replaced
+    # In theory, client can modify the ROOT files for unchanging parameters,
+    # and then only a few entries would be needed in here.
+    config:
+      directory_users:
+        groups:
+          - directory_group: "Group A"
+            adobe_groups:
+              - "Adobe Group A"
+    connector:
+      username: "LDAP or Credential Manager username goes here"
+      password: "LDAP password goes here"
+      host: "ldap://ldap.example.com"
+      base_dn: "DC=example,DC=com"
+
+# SYNC 2
+- id: "example_sync"
+  sync_type: "ldap"
+  sync_args: "--process-groups --users mapped"
+  sync_config:
+    # Only need to put in what is DIFFERENT from the default files.
+    # Note: dictionaries are recursed, but a non-dict values will be replaced
+    # In theory, client can modify the ROOT files for unchanging parameters,
+    # and then only a few entries would be needed in here.
+    config:
+      directory_users:
+        groups:
+          - directory_group: "Group Other"
+            adobe_groups:
+              - "Adobe Group Other"
+    connector:
+      username: "LDAP or Credential Manager username goes here"
+      password: "LDAP password goes here"
+      host: "ldap://ldap.example_other.com"
+      base_dn: "DC=example_other,DC=com"
+
+    extension: {}
+    umapi: {}
+
