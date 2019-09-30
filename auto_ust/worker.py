@@ -9,7 +9,7 @@ from subprocess import Popen, PIPE, STDOUT
 from copy import deepcopy
 import yaml
 
-from auto_sync.util import decode, timestamp
+from auto_ust.util import decode, timestamp
 
 
 class Worker():

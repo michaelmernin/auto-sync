@@ -1,6 +1,6 @@
 from setuptools import setup, find_packages
 
-from auto_sync._version import __version__
+from auto_ust._version import __version__
 
 with open("README.md", "r") as fh:
     long_description = fh.read()
@@ -11,7 +11,7 @@ setup_deps = [
                  'twine'
              ],
 
-setup(name='auto-sync',
+setup(name='auto-ust',
       version=__version__,
       description='Sync Tool Automator',
       long_description=long_description,
@@ -23,7 +23,7 @@ setup(name='auto-sync',
       license='MIT',
       packages=find_packages(),
       package_data={
-          'auto_sync': ['resources/*'],
+          'auto_ust': ['resources/*'],
       },
       install_requires=[
           'click',
@@ -36,7 +36,7 @@ setup(name='auto-sync',
       setup_requires=setup_deps,
       entry_points={
           'console_scripts': [
-              'auto_sync = auto_sync.app:cli',
+              'auto_ust = auto_ust.app:cli',
           ]
       },
       )

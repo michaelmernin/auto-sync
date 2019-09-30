@@ -10,7 +10,7 @@ from copy import deepcopy
 
 import yaml
 
-from auto_sync.util import compare_str, decode
+from auto_ust.util import compare_str, decode
 
 
 class Config():

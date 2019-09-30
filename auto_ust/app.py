@@ -6,11 +6,11 @@ import click
 import yaml
 from click_default_group import DefaultGroup
 
-from auto_sync.config import ConfigLoader
-from auto_sync.sync import Sync
-from auto_sync.util import read_file
-from auto_sync.worker import Worker
-from auto_sync.resources import get_resource
+from auto_ust.config import ConfigLoader
+from auto_ust.sync import Sync
+from auto_ust.util import read_file
+from auto_ust.worker import Worker
+from auto_ust.resources import get_resource
 
 
 @click.group(cls=DefaultGroup, default='sync', default_if_no_args=True)
@@ -36,12 +36,12 @@ def sync(**cli_options):
         props_filename = cli_options['config_path']
         working_dir = os.path.dirname(props_filename)
     else:
-        props_filename = 'auto_sync.ini'
+        props_filename = 'auto_ust.ini'
         working_dir = "."
 
     if not os.path.exists(props_filename):
         raise IOError(
-            "Error - file '{}' cannot be found.  Please check path or run 'auto_sync.exe generate' "
+            "Error - file '{}' cannot be found.  Please check path or run 'auto_ust.exe generate' "
             "to create a default version".format(props_filename))
 
     # Load the default config and merge the user values into it
@@ -54,7 +54,7 @@ def sync(**cli_options):
         sync_script = os.path.abspath(os.path.join(working_dir, sync_script))
     if not os.path.exists(sync_script):
         raise IOError(
-            "Error - file '{}' cannot be found.  Please check path or run 'auto_sync.exe generate' "
+            "Error - file '{}' cannot be found.  Please check path or run 'auto_ust.exe generate' "
             "to create a default version".format(props_filename))
 
     sync_folder = config.get_config('sync').get('sync_folder', working_dir)
@@ -89,10 +89,10 @@ def sync(**cli_options):
 
 @cli.command()
 def generate():
-    if not os.path.exists("auto_sync.ini"):
-        shutil.copy(get_resource("auto_sync.ini"), ".")
+    if not os.path.exists("auto_ust.ini"):
+        shutil.copy(get_resource("auto_ust.ini"), ".")
     else:
-        print("Skipping autocreate for auto_sync.ini - file exists.")
+        print("Skipping autocreate for auto_ust.ini - file exists.")
     if not os.path.exists("example_script.yml"):
         shutil.copy(get_resource("example_script.yml"), ".")
     else:

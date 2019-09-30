@@ -1,9 +1,9 @@
 # -*- mode: python ; coding: utf-8 -*-
 block_cipher = None
-a = Analysis(['auto_sync/app.py'],
+a = Analysis(['auto_ust/app.py'],
              pathex=[],
              binaries=[],
-             datas=  [( 'auto_sync/resources', 'resources' )],
+             datas=  [( 'auto_ust/resources', 'resources' )],
              hiddenimports=[],
              hookspath=[],
              runtime_hooks=[],
@@ -20,7 +20,7 @@ exe = EXE(pyz,
           a.zipfiles,
           a.datas,
           [],
-          name='auto_sync',
+          name='auto_ust',
           debug=False,
           bootloader_ignore_signals=False,
           strip=False,
@@ -29,4 +29,4 @@ exe = EXE(pyz,
           runtime_tmpdir=None,
           console=True,
           exclude_binaries=False,
-          icon='auto_sync/resources/icon.ico')
+          icon='auto_ust/resources/icon.ico')

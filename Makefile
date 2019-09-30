@@ -11,7 +11,7 @@ cleandir:
 
 standalone:
 	make cleandir
-	pyinstaller --clean --noconfirm auto_sync.spec
+	pyinstaller --clean --noconfirm auto_ust.spec
 
 wheel:
 	make cleandir
