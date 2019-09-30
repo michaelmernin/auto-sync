@@ -86,7 +86,7 @@ celerybeat-schedule
 .venv
 env/
 venv*
-test_fles/
+test_files/
 ENV/
 env.bak/
 venv.bak/
