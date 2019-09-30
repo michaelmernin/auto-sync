@@ -36,7 +36,7 @@ def sync(**cli_options):
         props_filename = cli_options['config_path']
         working_dir = os.path.dirname(props_filename)
     else:
-        props_filename = 'auto_ust.ini'
+        props_filename = 'auto_sync.ini'
         working_dir = "."
 
     if not os.path.exists(props_filename):
@@ -89,10 +89,10 @@ def sync(**cli_options):
 
 @cli.command()
 def generate():
-    if not os.path.exists("auto_ust.ini"):
-        shutil.copy(get_resource("auto_ust.ini"), ".")
+    if not os.path.exists("auto_sync.ini"):
+        shutil.copy(get_resource("auto_sync.ini"), ".")
     else:
-        print("Skipping autocreate for auto_ust.ini - file exists.")
+        print("Skipping autocreate for auto_sync.ini - file exists.")
     if not os.path.exists("example_script.yml"):
         shutil.copy(get_resource("example_script.yml"), ".")
     else:
