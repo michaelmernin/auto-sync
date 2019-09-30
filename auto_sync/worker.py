@@ -63,7 +63,8 @@ class Worker():
             'umapi': 'umapi.yml'
         }
 
-        full_config['config']['directory_users']['extension'] = 'extension.yml'
+        if full_config.get('extension'):
+            full_config['config']['directory_users']['extension'] = 'extension.yml'
         full_config['config']['directory_users']['connectors'] = {
             connector_type: "connector.yml"
         }

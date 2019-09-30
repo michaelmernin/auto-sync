@@ -1,4 +1,8 @@
-import configparser
+try:
+    import configparser
+except:
+    import ConfigParser as configparser
+
 import os
 import re
 from collections import Mapping
@@ -66,7 +70,7 @@ class Config():
 
     # returns a new config from subset of keys
     def get_sub_dict(self, keys):
-        return {k: self.values[k] for k in keys}
+        return {k: self.values.get(k) for k in keys}
 
     # returns a new config from subset of keys
     def get_sub_config(self, keys):

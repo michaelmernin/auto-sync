@@ -1,3 +1,4 @@
+
 output_dir = dist
 ifeq ($(OS),Windows_NT)
 	RM := rmdir /S /Q
@@ -16,6 +17,5 @@ wheel:
 	make cleandir
 	python setup.py sdist --formats=gztar  bdist_wheel
 
-all:
-	make wheel
-	make standalone
+upload:
+	twine upload dist/*.tar.gz dist/*.whl

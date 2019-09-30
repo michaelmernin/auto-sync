@@ -59,3 +59,4 @@ def timestamp(date=None):
     if date and not isinstance(date, datetime):
         return date
     return (date or datetime.now()).strftime(date_format)
+
